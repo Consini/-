@@ -14,6 +14,49 @@ import java.util.Scanner;
 public class 字符串变换 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
+        int op = sc.nextInt();
+        String s = sc.next();
+        switch (op){
+            case 1:
+                System.out.println(s.toUpperCase());
+                break;
+            case 2:
+                System.out.println(s.toLowerCase());
+                break;
+            case 3:
+                StringBuffer str = new StringBuffer(s);
+                System.out.println(str.reverse().toString());
+                break;
+            case 4:
+                for(int i = 0;i < s.length();i++){
+                    if(s.charAt(i)>='A' && s.charAt(i)<='Z'){
+                        System.out.print((char)(s.charAt(i)-'A'+'a'));
+                    }else{
+                        System.out.print((char)(s.charAt(i)-'a'+'A'));
+                    }
+                }
+                break;
+            case 5:
+                if(s.length() > 0) {
+                /*　5表示将全部转换为小写字母，并将其中所有的连续子串转换为对应的缩写形式输出，
+比如abcD 转换为a-d，其次，-至少代表1个字母，既如果是ab，则不需要转换为缩写形式。*/
+                    s = s.toLowerCase();
+                    StringBuffer st = new StringBuffer();
+                    st.append(s.charAt(0));
+                    for(int i = 1,j = 0;i < s.length();i++){
+                        while(i+j < s.length() && (char)(s.charAt(i+j)-j) == s.charAt(i)){
+                            j++;
+                        }
+                        if(j > 1) {
+                            st.append('-');
+                        }
+                        st.append(s.charAt(j));
+                        i+=j;
+                    }
+                    System.out.println(st.toString());
+                }
+                break;
+            default:break;
+        }
     }
 }
