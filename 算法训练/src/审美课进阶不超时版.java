@@ -1,57 +1,43 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.TreeMap;
+import org.omg.CORBA.PRIVATE_MEMBER;
 
+import java.io.*;
+import java.util.*;
 /**
  * @Description TODO
  * @Author K
  * @Date 2019/12/15 23:13
  **/
 public class 审美课进阶不超时版 {
-    private static InputStream in = System.in;//字符对象从控制台输入
-    private static BufferedReader br = null;
-    private static String getString(int size) throws IOException {
-        br = new BufferedReader(new InputStreamReader(in));
-        byte[] buf = new byte[size];
-        int len = in.read(buf);
-        String s = new String(buf, 0, len);
-        return s;
-    }
-    private static String reserve(String s){
-        String ret = "";
-        for(int i = 0;i < s.length();i++){
-            if(s.charAt(i) != ' ') {
-                ret += (char)(s.charAt(i) ^ 1);
-            }else{
-                ret += ' ';
-            }
+    private static Reader reader;//字符对象从控制台输入
+    private static int getInt() throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(reader);
+        String line;
+        StringBuilder sb = new StringBuilder();
+        while((line=bufferedReader.readLine()) != null){
+            sb.append(line+"\r\n");//自己加换行，否则readLine会自动去掉换行，读出的数据就是一行
         }
-        return ret;
+        return Integer.valueOf(sb.toString(),2);
     }
     public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        int sum = 0;
-        Map<String,Integer> map = new TreeMap<>();
-//        String[] c = getString().toString().split(" ");
-//        int n = Integer.parseInt(c[0]),m = Integer.parseInt(c[1]);
-        String[] c = sc.nextLine().split(" ");
-        int n = Integer.parseInt(c[0]),m = Integer.parseInt(c[1]);
-        for(int i = 0;i < n;i++){
-            String s = getString(2*m);
-            if(map.containsKey(s)){
-                map.put(s,map.get(s)+1);
-            }else{
-                map.put(s,1);
+        Map<Integer,Integer> map = new TreeMap<>();
+        int n = getInt(),m = getInt();
+        while(n-- != 0) {
+            int num = getInt();
+
             }
+            int num= Integer.valueOf(sb.toString(),2);
+            System.out.println(num);
+//            if(map.containsKey(num)){
+//                map.put(num,map.get(num)+1);
+//            }else{
+//                map.put(num,1);
+//            }
         }
-        for(Map.Entry<String,Integer> entry:map.entrySet()){
-            String st = reserve(entry.getKey());
-            if(map.containsKey(st)){
-                sum = sum + entry.getValue()*map.get(st);
+        int sum = 0;
+        for(Map.Entry<Integer,Integer> entry:map.entrySet()){
+            int k = entry.getKey()^1;
+            if(map.containsKey(k)){
+                sum = sum + entry.getValue()*map.get(k);
             }
         }
         System.out.println(sum/2);
